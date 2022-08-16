@@ -15,8 +15,6 @@ def mbusWrite(dlgid='', register='', dataType='', value='', fdbk='', mbTag=''):
     '''
     # Dependencias
     import redis
-    from spy_config import Config
-    from spy_log import log
 
     # Definición de ventanas de buffers de transmisión
     windowsFirmNuevo = 7
@@ -245,10 +243,6 @@ def mbusWrite(dlgid='', register='', dataType='', value='', fdbk='', mbTag=''):
             rh = redis.Redis(host, port, db)
             return True, rh
         except Exception as err_var:
-            log(module=__name__, function='__init__',
-                dlgid=dlgid, msg='Redis init ERROR !!')
-            log(module=__name__, function='__init__',
-                dlgid=dlgid, msg='EXCEPTION {}'.format(err_var))
             return False, ''
 
     def IsNull(key):
@@ -368,8 +362,12 @@ def mbusWrite(dlgid='', register='', dataType='', value='', fdbk='', mbTag=''):
         rh.hset(dlgid, key, 'NUL')
 
     # main program
-    redisConnection,rh = IsRedisConnected(host=Config['REDIS']['host'], port=Config['REDIS']['port'], db=Config['REDIS']['db'])
-    # redisConnection, rh = IsRedisConnected()
+    try:
+        from spy_config import Config
+        redisConnection,rh = IsRedisConnected(host=Config['REDIS']['host'], port=Config['REDIS']['port'], db=Config['REDIS']['db'])
+    except:
+        redisConnection, rh = IsRedisConnected()
+
     if redisConnection:
         if register:
             # para firmwares nuevos
@@ -511,6 +509,8 @@ def mbusWrite(dlgid='', register='', dataType='', value='', fdbk='', mbTag=''):
             if IsExist('MODBUS'):
 
                 if IsNull('MODBUS'):
+                    print('es nulooooo')
+
 
                     if IsExisting('lastMODBUS'):
 

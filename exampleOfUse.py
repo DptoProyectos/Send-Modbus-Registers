@@ -4,15 +4,17 @@ from modbusWrite import mbusWrite
 
 
 
-# Ejemplo #1 -------------------------------------------------------------------------------
-dlgid = 'YCHTEST'
-register = '2095'
-dataType = 'interger'               # interger | float
-value = 101
+# # Ejemplo #1 -------------------------------------------------------------------------------
+# dlgid = 'YCHTEST'
+# register = '2098'
+# dataType = 'interger'               # interger | float
+# value = 102
+# mbusWrite(dlgid, register, dataType, value)
+# # NOTA: El objetivo del llamado de la funcion en este caso es que se haga un envio de registros modbus a cierto datalogger.
 
-# llamo a la funcion para enviar el valor del registro
-mbusWrite(dlgid, register, dataType, value)
+# Ejemplo #2 -------------------------------------------------------------------------------
+dlgid = 'YCHTEST'
+mbusWrite(dlgid)
+# NOTA: El objetivo del llamado de la funcion en este caso es enviar al datalogger los registros que se encuentren en la cola en caso de que hayan. En caso contrario la funcion no realiza nada. En casa de que hayan registros pendiente de envio, no se sacan nuevos registros de la cola hasta que no se coloque en NUL el campo MODBUS o BROADCAST de redis
             
                     
-# si no hay datos llamo a la funcion por si le queda en cola algo para transmitir
-# mbusWrite(self.dlgid, register=None, dataType=None, value=None, fdbk=rcv_mbus_tag_id, mbTag=rcv_mbus_tag_val)
