@@ -18,7 +18,7 @@ def mbusWrite(dlgid='', register='', dataType='', value='', fdbk='', mbTag=''):
 
     # Definición de ventanas de buffers de transmisión
     windowsFirmNuevo = 7
-    windowsFirmViejo = 3
+    windowsFirmViejo = 15       # es el tamano del buffer que se puede llegar a transmitir hacia el PLC
 
     # parametros usados en el firmware nuevo
     MbusSlave = 2
