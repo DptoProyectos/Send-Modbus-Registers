@@ -1,3 +1,6 @@
+#!/usr/aut_env/bin/python3.8
+
+
 def mbusWrite(dlgid='', register='', dataType='', value='', fdbk='', mbTag=''):
     '''
         FLOWCHART -> https://drive.google.com/file/d/191gir1No6tSEBDgU3e76ekZJqHQl5jET/view?usp=sharing
